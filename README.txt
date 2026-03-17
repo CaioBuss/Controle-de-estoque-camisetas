@@ -1,2 +1,7 @@
-Projeto criado para avaliação G1 da aula de ORGANIZAÇÃO E ABSTRAÇÃO NA PROGRAMAÇÃO do professor Augusto Ortolan
+Organização e abstração na PROGRAMAÇÃO
+TRABALHO G1 ESTRUTURA DE DADOS COM PYTHON
+Caio Buss RA 1138241
+
+Sistema de controle de estoque para uma loja de camisetas
+
 
