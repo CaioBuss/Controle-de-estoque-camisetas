@@ -1,5 +1,6 @@
 from Classes import Camiseta, Cliente, Venda
 from Estruturas import ListaEncadeada, Fila, Pilha
+from funcoesMenu import cadastrar_cliente, cadastrar_produto, realizar_venda, desfazer
 
 cliente = ListaEncadeada()
 camiseta = ListaEncadeada()
@@ -22,6 +23,5 @@ def menu():
 11 - Exibir clientes e valores gastos
 12 - Sair
 ========================
-
           ''')
 
