@@ -1,10 +1,10 @@
 from Classes import Camiseta, Cliente, Venda
-from Estruturas import ListaEncadeada, Fila, Pilha
+from Estruturas import ListaEncadeada, Fila, Pilha, somar_estoque
 from funcoesMenu import cadastrar_cliente, cadastrar_produto, realizar_venda, desfazer
 
-cliente = ListaEncadeada()
-camiseta = ListaEncadeada()
-venda = Fila()
+clientes = ListaEncadeada()
+camisetas = ListaEncadeada()
+vendas =Fila()
 pilha = Pilha()
 
 def menu():
@@ -25,3 +25,44 @@ def menu():
 ========================
           ''')
 
+def main():
+    while True:
+        menu()
+        op = input("Escolha uma opção: ")
+
+        if op == '1':
+            cadastrar_cliente(clientes, pilha)
+        elif op == '2':
+            clientes.imprimir()
+        elif op == '3':
+            cadastrar_produto(camisetas, pilha)
+        elif op == '4':
+            camisetas.imprimir()
+        elif op == '5':
+            id_camiseta = int(input("Insira o ID do produto: "))
+            print(camisetas.buscar(id_camiseta))
+        elif op == '6':
+            realizar_venda(clientes, camisetas, vendas, pilha  )
+        elif op == '7':
+            vendas.imprimir()
+        elif op == '8':
+            desfazer(pilha)
+        elif op == '9':
+            print(f"Valor total do estoque: R${somar_estoque(camisetas):.2f}")
+        elif op == '10':
+            total_vendas = sum(v.valor_total for v in vendas)
+            print(f"Valor total de vendas: R${total_vendas:.2f}")
+        elif op == '11':
+            clientes_gastos = {}
+            for v in vendas:
+                if v.cliente.nome not in clientes_gastos:
+                    clientes_gastos[v.cliente.nome] = 0
+                clientes_gastos[v.cliente.nome] += v.valor_total
+            for nome, gasto in clientes_gastos.items():
+                print(f"{nome}: R${gasto:.2f}")
+        elif op == '12':
+            print("Saindo...")
+            break
+
+if __name__ == "__main__":
+    main()

@@ -7,20 +7,16 @@ class ListaEncadeada:
     def __init__(self):
         self.cabeca = None
     
-    def adicionar(self, valor):
+    def inserir(self, valor):
         novo_node = Node(valor)
-        if not self.cabeca:
-            self.cabeca = novo_node
-        else:
-            atual = self.cabeca
-            while atual.proximo:
-                atual = atual.proximo
-            atual.proximo = novo_node
-def imprimir(self):
-    atual = self.cabeca
-    while atual:
-        print(atual.valor)
-        atual = atual.proximo
+        novo_node.proximo = self.cabeca
+        self.cabeca = novo_node
+
+    def imprimir(self):
+        atual = self.cabeca
+        while atual:
+            print(atual.valor)
+            atual = atual.proximo
 
 def buscar(self, id):
     atual = self.cabeca
@@ -29,6 +25,14 @@ def buscar(self, id):
             return atual.valor
         atual = atual.proximo
     return None
+
+def somar_estoque(self):
+    total = 0
+    atuial = self.cabeca
+    while atual:
+        total += atual.valor.preco * atual.valor.quantidade
+        atual = atual.proximo
+    return total
 
 class Fila:
     def __init__(self):
