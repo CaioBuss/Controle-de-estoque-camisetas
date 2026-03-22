@@ -1,11 +1,18 @@
 from Classes import Camiseta, Cliente, Venda
 from Estruturas import ListaEncadeada, Fila, Pilha, somar_estoque
 from funcoesMenu import cadastrar_cliente, cadastrar_produto, realizar_venda, desfazer
+from Registro import salvar, carregar
 
 clientes = ListaEncadeada()
 camisetas = ListaEncadeada()
 vendas =Fila()
 pilha = Pilha()
+
+for c in carregar('clientes.txt', Cliente):
+    clientes.inserir(c)
+
+for p in carregar('produtos.txt', Camiseta):
+    camisetas.inserir(p)
 
 def menu():
     print('''
@@ -44,7 +51,7 @@ def main():
         elif op == '6':
             realizar_venda(clientes, camisetas, vendas, pilha  )
         elif op == '7':
-            vendas.imprimir()
+            vendas.listar()
         elif op == '8':
             desfazer(pilha)
         elif op == '9':

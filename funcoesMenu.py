@@ -2,44 +2,63 @@
 
 from Classes import Cliente, Camiseta, Venda
 from Estruturas import ListaEncadeada, Fila, Pilha
+from Registro import salvar, carregar
+
 
 def cadastrar_cliente(clientes, pilha):
-    nome= input("Insita o nome: ")
-    if nome:
-        cliente = Cliente(id(nome), nome)
-        clientes.inserir(cliente)
-        pilha.push(('cliente', cliente))
-        print("Cliente cadastrado com sucesso!")
+    nome = input("Nome: ").strip()
+    # CAPIVARA
+    if not nome:
+        print("Nome inválido!")
+        return
 
-def cadastrar_produto(camisetas, pilha):
-    nome = input("Insira o nome do produto: ")
-    quantidade = int(input("Insira a quantidade: "))
-    preco = float(input("Insira o preço: ")) 
-    if nome and quantidade > 0 and preco > 0:
-        camiseta = Camiseta(id(nome), nome, quantidade, preco)
-        camisetas.inserir(camiseta)
-        pilha.push(('camiseta', camiseta))
-        print("Produto cadastrado com sucesso!")
+    cliente = Cliente(id(nome), nome)
+    clientes.inserir(cliente)
+    pilha.push(("cliente", cliente))
+    print("Cliente cadastrado!")
 
-def realizar_venda(clientes, camisetas, vendas, pilha):
-    id_cliente = int(input("Insira o ID do cliente: "))
-    id_camiseta = int(input("Insira o ID do produto: "))
-    quantidade = int(input("Insira a quantidade: "))
-    cliente_encontrado = clientes.buscar(id_cliente)
-    produto_encontrado = camisetas.buscar(id_camiseta)
-    if cliente_encontrado and produto_encontrado and produto_encontrado.quantidade >= quantidade:
-        valor_total = produto_encontrado.preco * quantidade
-        venda_atual = Venda(id(cliente_encontrado), cliente_encontrado, produto_encontrado, quantidade, valor_total)
-        vendas.enqueue(venda_atual)
-        pilha.push(('venda', venda_atual))
-        produto_encontrado.quantidade -= quantidade
-        print("Venda realizada com sucesso!")
-    else:
-        print("Cliente ou produto não encontrado, ou produto sem estoque.")
 
-def desfazer():
-    op = Pilha.pop()
+def cadastrar_produto(produtos, pilha):
+    nome = input("Nome: ").strip()
+    if not nome:
+        print("Nome inválido!")
+        return
+
+    try:
+        quantidade = int(input("Quantidade: "))
+        if quantidade <= 0:
+            raise ValueError
+    except:
+        print("Quantidade inválida!")
+        return
+
+    try:
+        preco = float(input("Preço: ").replace(',', '.'))
+        if preco <= 0:
+            raise ValueError
+    except:
+        print("Preço inválido!")
+        return
+
+    produto = Camiseta(id(nome), nome, quantidade, preco)
+    produtos.inserir(produto)
+    pilha.push(("produto", produto))
+    salvar('produtos.txt', produtos.to_list())
+    print("Produto cadastrado!")
+
+
+def realizar_venda(clientes, produtos, vendas, pilha):
+        id_cli = int(input("ID cliente: "))
+        id_prod = int(input("ID produto: "))
+        qtd = int(input("Quantidade: "))
+        if qtd <= 0:
+            raise ValueError
+        print("Nada para desfazer")
+
+def desfazer(pilha):
+    op = pilha.pop()
+    # CAPIVARA
     if op:
-        print("Operaçao desfeita:", op)
+        print("Desfeito:", op)
     else:
-        print("Nada para desfazer.")
+        print("Nada para desfazer")
