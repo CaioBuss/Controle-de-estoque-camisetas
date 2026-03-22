@@ -48,13 +48,33 @@ def cadastrar_produto(produtos, pilha):
 
 
 def realizar_venda(clientes, produtos, vendas, pilha):
+    try:
         id_cli = int(input("ID cliente: "))
         id_prod = int(input("ID produto: "))
         qtd = int(input("Quantidade: "))
-        if qtd <= 0:
-            raise ValueError
-        print("Nada para desfazer")
+    except:
+        print("Entrada inválida!")
+        return
 
+    cliente = clientes.buscar(id_cli)
+    produto = produtos.buscar(id_prod)
+
+    if not cliente or not produto:
+        print("Cliente ou produto não encontrado!")
+        return
+
+    if produto.quantidade < qtd:
+        print("Estoque insuficiente!")
+        return
+
+    total = qtd * produto.preco
+    produto.quantidade -= qtd
+
+    venda = Venda(id(total), cliente, produto, total)
+    vendas.enqueue(venda)
+    pilha.push(("venda", venda))
+
+    print("Venda realizada!")
 def desfazer(pilha):
     op = pilha.pop()
     # CAPIVARA

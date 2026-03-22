@@ -18,30 +18,38 @@ class ListaEncadeada:
             print(atual.valor)
             atual = atual.proximo
 
-def buscar(self, id):
-    atual = self.cabeca
-    while atual:
-        if atual.valor.id == id:
-            return atual.valor
-        atual = atual.proximo
-    return None
+    def buscar(self, id):
+        atual = self.cabeca
+        while atual:
+            if atual.valor.id == id:
+                return atual.valor
+            atual = atual.proximo
+        return None
 
-def somar_estoque(self):
-    total = 0
-    atuial = self.cabeca
-    while atual:
-        total += atual.valor.preco * atual.valor.quantidade
-        atual = atual.proximo
-    return total
-
+    def somar_estoque(self):
+        total = 0
+        atual = self.cabeca
+        while atual:
+            total += atual.valor.preco * atual.valor.quantidade
+            atual = atual.proximo
+        return total
+    
+    def to_list(self):
+        lista = []
+        atual = self.cabeca
+        while atual:
+            lista.append(atual.valor)
+            atual = atual.proximo
+        return lista
+    
 class Fila:
     def __init__(self):
         self.items = []
 
-    def push(self, item):
+    def enqueue(self, item):
         self.items.append(item)
 
-    def pop(self):
+    def dequeue(self):
         if not self.is_empty():
             return self.items.pop(0)
         return None

@@ -55,7 +55,7 @@ def main():
         elif op == '8':
             desfazer(pilha)
         elif op == '9':
-            print(f"Valor total do estoque: R${somar_estoque(camisetas):.2f}")
+            print(f"Valor total do estoque: R${camisetas.somar_estoque():.2f}")
         elif op == '10':
             total_vendas = sum(v.valor_total for v in vendas)
             print(f"Valor total de vendas: R${total_vendas:.2f}")

@@ -8,7 +8,7 @@ class Camiseta:
         return f"ID: {self.id}, Nome: {self.nome}, Quantidade: {self.quantidade}, Preço: R${self.preco:.2f}"
 
 class Cliente:
-    def __init__(self, nome, id):
+    def __init__(self, id, nome):
         self.id = id
         self.nome = nome
     def __str__(self):
